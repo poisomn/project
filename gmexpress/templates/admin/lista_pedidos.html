@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pedidos (Admin)</h2>
+<form class="mb-3" method="get">
+  <div class="row g-2">
+    <div class="col-auto">
+      <select name="estado" class="form-select" onchange="this.form.submit()">
+        <option value="">Todos</option>
+        <option value="pendiente" {% if estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+        <option value="camino" {% if estado == 'camino' %}selected{% endif %}>En camino</option>
+        <option value="entregado" {% if estado == 'entregado' %}selected{% endif %}>Entregado</option>
+      </select>
+    </div>
+  </div>
+</form>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Cliente</th>
+      <th>Descripción</th>
+      <th>Dirección</th>
+      <th>Estado</th>
+      <th>Chofer</th>
+      <th>Vehículo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pedidos %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.cliente.username }}</td>
+      <td>{{ p.descripcion }}</td>
+      <td>{{ p.direccion_entrega }}</td>
+      <td>{{ p.get_estado_display }}</td>
+      <td>{{ p.chofer|default:"-" }}</td>
+      <td>{{ p.vehiculo|default:"-" }}</td>
+      <td>
+        <a class="btn btn-sm btn-primary" href="{% url 'asignar_pedido' p.id %}">Asignar/Editar</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pedidos asignados (Chofer)</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Dirección</th>
+      <th>Estado</th>
+      <th>Evidencia</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pedidos %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.descripcion }}</td>
+      <td>{{ p.direccion_entrega }}</td>
+      <td>{{ p.get_estado_display }}</td>
+      <td>{% if p.evidencia %}<a href="{{ p.evidencia.url }}" target="_blank">Ver</a>{% else %}-{% endif %}</td>
+      <td><a class="btn btn-sm btn-primary" href="{% url 'actualizar_pedido' p.id %}">Actualizar</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

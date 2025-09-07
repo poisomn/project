@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<p class="text-muted">Resumen rápido del estado de los pedidos.</p>
+<div class="row g-3">
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Total</h5>
+        <p class="display-6">{{ total_pedidos|default:'-' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Pendientes</h5>
+        <p class="display-6">{{ pendientes|default:'-' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">En camino</h5>
+        <p class="display-6">{{ en_camino|default:'-' }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">Entregados</h5>
+        <p class="display-6">{{ entregados|default:'-' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

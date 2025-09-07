@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mis pedidos</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Dirección</th>
+      <th>Estado</th>
+      <th>Chofer</th>
+      <th>Vehículo</th>
+      <th>Creado</th>
+      <th>Evidencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pedidos %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.descripcion }}</td>
+      <td>{{ p.direccion_entrega }}</td>
+      <td>{{ p.get_estado_display }}</td>
+      <td>{% if p.chofer %}{{ p.chofer }}{% else %}-{% endif %}</td>
+      <td>{% if p.vehiculo %}{{ p.vehiculo }}{% else %}-{% endif %}</td>
+      <td>{{ p.fecha_creacion|date:"d-m-Y H:i" }}</td>
+      <td>
+        {% if p.evidencia %}
+          <a href="{{ p.evidencia.url }}" target="_blank">Ver</a>
+        {% else %}-{% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
